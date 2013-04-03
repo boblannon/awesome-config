@@ -6,6 +6,8 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
+-- Widgets and stuff
+vicious = require("vicious")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -18,6 +20,18 @@ if awesome.startup_errors then
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
+
+-- Initialize widgets
+datewidget = widget({ type = "textbox" })
+cpuwidget = widget({ type = "textbox" })
+memwidget = widget({ type = "textbox" })
+batwidget = widget({ type = "textbox" })
+
+-- Register widget
+vicious.register(datewidget, vicious.widgets.date, "  %b %d, %I:%M %p", 60)-- Widgets!
+vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ")
+vicious.register(memwidget, vicious.widgets.mem, "  ($2MB) ", 13)
+vicious.register(batwidget, vicious.widgets.bat, " $1 $3 ",67, "BAT0")
 
 -- Handle runtime errors after startup
 do
@@ -176,10 +190,14 @@ for s = 1, screen.count() do
             mylauncher,
             mytaglist[s],
             mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
+            layout = awful.widget.layout.horizontal.leftright,
         },
         mylayoutbox[s],
-        mytextclock,
+        datewidget,
+        batwidget,
+        memwidget,
+        cpuwidget,
+        -- mytextclock,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
