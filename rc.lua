@@ -31,7 +31,7 @@ batwidget = widget({ type = "textbox" })
 vicious.register(datewidget, vicious.widgets.date, "  %b %d, %I:%M %p", 60)-- Widgets!
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ")
 vicious.register(memwidget, vicious.widgets.mem, "  ($2MB) ", 13)
-vicious.register(batwidget, vicious.widgets.bat, " $1 $3 ",67, "BAT0")
+vicious.register(batwidget, vicious.widgets.bat, " $1 $2 ",67, "BAT0")
 
 -- Handle runtime errors after startup
 do
@@ -52,7 +52,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 -- beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
-beautiful.init("/usr/share/awesome/themes/niceandclean/theme.lua")
+-- beautiful.init("/usr/share/awesome/themes/niceandclean/theme.lua")
+beautiful.init("/home/blannon/.config/awesome/themes/awesome-themes/niceandclean/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -395,4 +396,4 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.util.spawn_with_shell("gnome-settings-daemon")
+--awful.util.spawn_with_shell("gnome-settings-daemon")
