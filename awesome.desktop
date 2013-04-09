@@ -1,0 +1,6 @@
+[Desktop Entry] 
+Encoding=UTF-8
+Name=awesome
+Comment=Highly configurable framework window manager
+TryExec=/home/blannon/.config/awesome/autostart-awesome
+Exec=/home/blannon/.config/awesome/autostart-awesome
