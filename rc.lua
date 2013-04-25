@@ -26,12 +26,14 @@ datewidget = widget({ type = "textbox" })
 cpuwidget = widget({ type = "textbox" })
 memwidget = widget({ type = "textbox" })
 batwidget = widget({ type = "textbox" })
+thermalwidget  = widget({ type = "textbox" })
 
 -- Register widget
 vicious.register(datewidget, vicious.widgets.date, "  %b %d, %I:%M %p", 60)-- Widgets!
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ")
 vicious.register(memwidget, vicious.widgets.mem, "  ($2MB) ", 13)
 vicious.register(batwidget, vicious.widgets.bat, " $1 $2 ",67, "BAT0")
+vicious.register(thermalwidget, vicious.widgets.thermal, " - $1°C", 20, { "thermal_zone0", "sys"} )
 
 -- Handle runtime errors after startup
 do
@@ -198,6 +200,7 @@ for s = 1, screen.count() do
         datewidget,
         batwidget,
         memwidget,
+        thermalwidget,
         cpuwidget,
         -- mytextclock,
         s == 1 and mysystray or nil,
