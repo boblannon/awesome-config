@@ -3,5 +3,5 @@ nm-applet &
 gnome-power-manager &
 gnome-volume-manager &
 eval `gnome-keyring-daemon` &
-dropboxd &
+dropbox start &
 exec awesome
