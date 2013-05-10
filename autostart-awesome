@@ -5,4 +5,4 @@ gnome-volume-manager &
 eval `gnome-keyring-daemon` &
 dropbox start &
 udisks-glue -c ~/.config/awesome/udisks-config
-exec awesome
+exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
