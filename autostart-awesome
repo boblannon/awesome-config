@@ -1,7 +1,6 @@
 gnome-settings-daemon &
 nm-applet &
 gnome-power-manager &
-gnome-volume-manager &
 eval `gnome-keyring-daemon` &
 dropbox start &
 udisks-glue -c ~/.config/awesome/udisks-config
