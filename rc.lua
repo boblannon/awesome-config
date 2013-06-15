@@ -55,8 +55,8 @@ end
 -- Themes define colours, icons, and wallpapers
 -- beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 -- beautiful.init("/usr/share/awesome/themes/niceandclean/theme.lua")
--- beautiful.init("/home/blannon/.config/awesome/themes/awesome-themes/niceandclean/theme.lua")
-beautiful.init("/home/blannon/.config/awesome/themes/awesome-themes/green-owl/theme.lua")
+beautiful.init("/home/blannon/.config/awesome/themes/awesome-themes/niceandclean/theme.lua")
+-- beautiful.init("/home/blannon/.config/awesome/themes/awesome-themes/green-owl/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
