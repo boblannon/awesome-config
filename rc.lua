@@ -29,7 +29,7 @@ batwidget = widget({ type = "textbox" })
 thermalwidget  = widget({ type = "textbox" })
 
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, "  %b %d, %I:%M %p", 60)-- Widgets!
+vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %H:%M", 60)-- Widgets!
 vicious.register(cpuwidget, vicious.widgets.cpu, " $1% ")
 vicious.register(memwidget, vicious.widgets.mem, "  ($2MB) ", 13)
 vicious.register(batwidget, vicious.widgets.bat, " $1 $2 ",67, "BAT0")
@@ -118,7 +118,8 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
+mytextclock = awful.widget.textclock({ align = "right" ,
+                                       format = "%a %b %d, %H:%M"})
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
