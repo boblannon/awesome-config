@@ -1,0 +1,25 @@
+#!/bin/bash
+# wallpaper.sh
+
+pidfile=$HOME/.wallpaper.sh.pid
+trap "rm -f -- '$pidfile'" EXIT
+
+WALLPAPER_DIR="/path/to/pictures/dir"
+
+if [ ! -f $pidfile ]; then
+    echo $$ > $pidfile
+fi
+
+running_pid=`cat ${pidfile}`
+
+if [ "$running_pid" ] && [ "$$" != "$running_pid" ]; then
+    kill -9 $running_pid
+    echo $$ > $pidfile
+fi
+
+while [ 1 ]
+do
+    feh --bg-fill $(ls $WALLPAPER_DIR/*.jpg | sort -R | tail -n1)
+    sleep 10
+done
+
