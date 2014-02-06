@@ -3,13 +3,27 @@
 --     By Gwenhael Le Moine    --
 ---------------------------------
 
+require("awful.util")
+
 -- Alternative icon sets and widget icons:
 --  * http://awesome.naquadah.org/wiki/Nice_Icons
+
+home = os.getenv("HOME")
+config = awful.util.getdir("config")
 
 -- {{{ Main
 theme = {}
 theme.default_themes_path = "/usr/share/awesome/themes"
-theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
+-- theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
+
+wpscript = config.."/wallpaper.sh"
+
+if awful.util.file_readable(wpscript) then
+    theme.wallpaper_cmd = { wpscript.." &" }
+else
+    theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
+end
+
 theme.colors = {}
 theme.colors.base3   = "#002b36ff"
 theme.colors.base2   = "#073642ff"
@@ -30,7 +44,7 @@ theme.colors.green   = "#859900ff"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Terminus 9"
+theme.font      = "Sans 8"
 
 -- {{{ Colors
 theme.fg_normal  = theme.colors.base02
@@ -45,7 +59,7 @@ theme.bg_systray = theme.bg_normal
 
 -- {{{ Borders
 theme.border_width  = "2"
-theme.border_normal = theme.bg_normal
+theme.border_normal = theme.colors.base1
 theme.border_focus  = theme.bg_focus
 theme.border_marked = theme.bg_urgent
 -- }}}
