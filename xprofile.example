@@ -1,0 +1,4 @@
+SYSRESOURCES=/etc/X11/Xresources
+USRRESOURCES=$HOME/.Xresources
+
+exec $HOME/.config/awesome/autostart-awesome

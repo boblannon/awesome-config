@@ -1,7 +1,5 @@
 gnome-settings-daemon &
 nm-applet &
-gnome-power-manager &
-eval `gnome-keyring-daemon` &
 dropbox start &
 udisks-glue -c ~/.config/awesome/udisks-config
 exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
