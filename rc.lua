@@ -269,10 +269,22 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
+
+
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey,           }, "Left",   
+        function()
+                awful.tag.viewprev()
+                awful.client.focus.byidx( 1)
+                if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey,           }, "Right",
+        function()
+                awful.tag.viewprev()
+                awful.client.focus.byidx( 1)
+                if client.focus then client.focus:raise() end
+        end),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
