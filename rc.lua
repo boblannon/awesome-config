@@ -281,7 +281,7 @@ globalkeys = awful.util.table.join(
         end),
     awful.key({ modkey,           }, "Right",
         function()
-                awful.tag.viewprev()
+                awful.tag.viewnext()
                 awful.client.focus.byidx( 1)
                 if client.focus then client.focus:raise() end
         end),
