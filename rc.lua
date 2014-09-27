@@ -8,9 +8,22 @@ require("beautiful")
 require("naughty")
 -- Widgets and stuff
 vicious = require("vicious")
+-- volume widget
+local APW = require("widgets.apw.widget")
 
 -- Load Debian menu entries
 require("debian.menu")
+
+-- Override awesome.quit when we're using GNOME
+-- _awesome_quit = awesome.quit
+-- awesome.quit = function()
+--     if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
+--        os.execute("/usr/bin/gnome-session-quit --logout --power-off --reboot")
+--     else
+--         _awesome_quit()
+--     end
+-- end
+
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -27,6 +40,38 @@ cpuwidget = widget({ type = "textbox" })
 memwidget = widget({ type = "textbox" })
 batwidget = widget({ type = "textbox" })
 thermalwidget  = widget({ type = "textbox" })
+
+-----------------------------------------------------------------------------------------------------
+-- Keyboard widget
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+
+--list your own keyboard layouts here
+kbdcfg.layout = { "us","in hin-kagapa" }
+
+kbdcfg.current = 1
+kbdcfg.widget = widget({ type = "textbox", align = "right" })
+kbdcfg.widget.text = " " .. string.sub(kbdcfg.layout[kbdcfg.current], 0, 3) .. " "
+kbdcfg.switch = function ()
+    kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+    local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+    kbdcfg.widget.text = string.sub(t, 0, 3)
+    os.execute( kbdcfg.cmd .. " " .. t .. ",us")
+end
+
+kbdcfg.widget:buttons(awful.util.table.join(
+    awful.button({ }, 1, function () kbdcfg.switch() end)
+))
+
+-----------------------------------------------------------------------------------------------------
+-- Disk usage widget
+diskwidget = widget({ type = 'imagebox' })
+diskwidget.image = image("/home/blannon/.config/awesome/du.png")
+disk = require("widgets.diskusage")
+-- the first argument is the widget to trigger the diskusage
+-- the second/third is the percentage at which a line gets orange/red
+-- true = show only local filesystems
+disk.addToWidget(diskwidget, 75, 90, false)
 
 -- Register widget
 vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %H:%M", 60)-- Widgets!
@@ -205,6 +250,9 @@ for s = 1, screen.count() do
         memwidget,
         thermalwidget,
         cpuwidget,
+        kbdcfg.widget,
+        -- APW ,
+        diskwidget,
         -- mytextclock,
         s == 1 and mysystray or nil,
         mytasklist[s],
@@ -215,9 +263,9 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
+    -- awful.button({ }, 4, awful.tag.viewnext),
+    -- awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -266,9 +314,22 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    
+    awful.key({ modkey,           }, "#49", function () kbdcfg.switch() end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
+    -- Volume
+    awful.key({ }, "XF86AudioRaiseVolume",  APW.Up),
+    awful.key({ }, "XF86AudioLowerVolume",  APW.Down),
+    awful.key({ }, "XF86AudioMute",         APW.ToggleMute),
+
+    -- Brightness
+
+    awful.key({ }, "XF86MonBrightnessDown", function ()
+        awful.util.spawn("xbacklight -dec 5") end),
+    awful.key({ }, "XF86MonBrightnessUp", function ()
+        awful.util.spawn("xbacklight -inc 5") end),
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
@@ -371,6 +432,10 @@ awful.rules.rules = {
     { rule = { class = "inkscape" },
       properties = { floating = true },
       callback = awful.titlebar.add    },
+    --{ rule = { class = "Emacs" },
+    --  properties = { sticky = true }},
+    { rule = { class = "Pidgin", role="conversation"},
+      properties = { sticky = true, floating = true }}
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
