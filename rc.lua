@@ -446,8 +446,11 @@ awful.rules.rules = {
       callback = awful.titlebar.add    },
     --{ rule = { class = "Emacs" },
     --  properties = { sticky = true }},
-    { rule = { class = "Pidgin", role="conversation"},
-      properties = { sticky = true, floating = true }}
+    { rule = { class = "Pidgin"},
+      properties = { tag = tags[1][9]},
+      callback = awful.client.setslave},
+    { rule = { class = "Emacs"},
+      properties = { tag = tags[1][1]}}
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
