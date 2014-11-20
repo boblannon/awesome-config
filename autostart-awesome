@@ -1,5 +1,5 @@
-gnome-settings-daemon &
-nm-applet &
-dropbox start &
-udisks-glue -c ~/.config/awesome/udisks-config
+#gnome-settings-daemon &
+#nm-applet &
+#dropbox start &
+#udisks-glue -c ~/.config/awesome/udisks-config
 exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
