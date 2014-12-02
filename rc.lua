@@ -10,6 +10,7 @@ require("naughty")
 vicious = require("vicious")
 -- volume widget
 local APW = require("widgets.apw.widget")
+local systemctl = require("systemctl")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -18,9 +19,23 @@ require("debian.menu")
 _awesome_quit = awesome.quit
 awesome.quit = function()
     if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
-       os.execute("systemctl poweroff")
+       systemctl.poweroff()
     else
-        _awesome_quit()
+       _awesome_quit()
+    end
+end
+
+systemctl_reboot = function()
+    if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
+       systemctl.reboot()
+    else
+    end
+end
+
+systemctl_hiberate = function()
+    if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
+       systemctl.hibernate()
+    else
     end
 end
 
@@ -319,7 +334,9 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey, "Shift"   }, "q", systemctl.poweroff),
+    awful.key({ modkey, "Shift"   }, "b", systemctl.reboot),
+    awful.key({ modkey, "Shift"   }, "z", systemctl.hibernate),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
