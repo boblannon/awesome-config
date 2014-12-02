@@ -444,6 +444,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    { rule = { role = "pop-up" },
+      properties = { floating = true } },
     { rule = { class = "inkscape" },
       properties = { floating = true },
       callback = awful.titlebar.add    },
