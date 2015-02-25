@@ -10,6 +10,7 @@ require("awful.util")
 
 home = os.getenv("HOME")
 config = awful.util.getdir("config")
+this_dir = config.."/themes/awesome-solarized/dark"
 
 -- {{{ Main
 theme = {}
@@ -25,14 +26,14 @@ else
 end
 
 theme.colors = {}
-theme.colors.base3   = "#002b36ff"
-theme.colors.base2   = "#073642ff"
-theme.colors.base1   = "#586e75ff"
-theme.colors.base0   = "#657b83ff"
-theme.colors.base00  = "#839496ff"
-theme.colors.base01  = "#93a1a1ff"
-theme.colors.base02  = "#eee8d5ff"
-theme.colors.base03  = "#fdf6e3ff"
+theme.colors.base3   = "#fdf6e3ff"
+theme.colors.base2   = "#eee8d5ff"
+theme.colors.base1   = "#93a1a1ff"
+theme.colors.base0   = "#839496ff"
+theme.colors.base00  = "#657b83ff"
+theme.colors.base01  = "#586e75ff"
+theme.colors.base02  = "#073642ff"
+theme.colors.base03  = "#002b36ff"
 theme.colors.yellow  = "#b58900ff"
 theme.colors.orange  = "#cb4b16ff"
 theme.colors.red     = "#dc322fff"
@@ -65,8 +66,8 @@ theme.border_marked = theme.bg_urgent
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = theme.bg_focus
-theme.titlebar_bg_normal = theme.bg_normal
+theme.titlebar_bg_focus  = theme.fg_focus
+theme.titlebar_bg_normal = theme.fg_normal
 -- }}}
 
 -- {{{ Mouse finder
@@ -84,8 +85,11 @@ theme.menu_width  = "100"
 
 -- {{{ Icons
 -- {{{ Taglist
-theme.taglist_squares_sel   = theme.default_themes_path.."/zenburn/taglist/squarefz.png"
-theme.taglist_squares_unsel = theme.default_themes_path.."/zenburn/taglist/squarez.png"
+-- theme.taglist_squares_sel   = theme.default_themes_path.."/zenburn/taglist/squarefz.png"
+-- theme.taglist_squares_unsel = theme.default_themes_path.."/zenburn/taglist/squarez.png"
+theme.taglist_squares_sel   = this_dir.."/taglist/squarefz.png"
+theme.taglist_squares_unsel = this_dir.."/taglist/squarez.png"
+-- theme.taglist_bg_occupied = 
 --theme.taglist_squares_resize = "false"
 -- }}}
 
