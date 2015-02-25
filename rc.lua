@@ -10,18 +10,17 @@ require("naughty")
 vicious = require("vicious")
 -- volume widget
 local APW = require("widgets.apw.widget")
+-- local keydoc = require("widgets.keydoc.keydoc")
 local systemctl = require("systemctl")
 
 -- Load Debian menu entries
 require("debian.menu")
 
--- Override awesome.quit when we're using GNOME
-_awesome_quit = awesome.quit
-awesome.quit = function()
+systemctl_shutdown = function()
     if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
        systemctl.poweroff()
     else
-       _awesome_quit()
+       awesome.quit()
     end
 end
 
@@ -166,7 +165,8 @@ myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "quit", awesome.quit }
+   { "quit", awesome.quit },
+   { "shutdown", systemctl_shutdown }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
