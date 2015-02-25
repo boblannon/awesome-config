@@ -65,7 +65,7 @@ kbdcfg.cmd = "setxkbmap"
 kbdcfg.layout = { "us","in hin-kagapa" }
 
 kbdcfg.current = 1
-kbdcfg.widget = widget({ type = "textbox", align = "right" })
+kbdcfg.widget = widget({ type = "textbox"})
 kbdcfg.widget.text = " " .. string.sub(kbdcfg.layout[kbdcfg.current], 0, 3) .. " "
 kbdcfg.switch = function ()
     kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
@@ -181,8 +181,7 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" ,
-                                       format = "%a %b %d, %H:%M"})
+mytextclock = awful.widget.textclock({ format = "%a %b %d, %H:%M"})
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -269,8 +268,8 @@ for s = 1, screen.count() do
         thermalwidget,
         cpuwidget,
         kbdcfg.widget,
-        -- APW ,
         diskwidget,
+        s == 1 and APW or nil,
         -- mytextclock,
         s == 1 and mysystray or nil,
         mytasklist[s],
