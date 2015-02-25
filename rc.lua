@@ -306,12 +306,12 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "k",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.byidx(1)
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
@@ -460,8 +460,12 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    { rule = { role = "pop-up" },
-      properties = { floating = true } },
+    { rule = { class = "Zenity" },
+      properties = { floating = true, sticky = true } },
+    { rule = { class = "Xmessage" },
+      properties = { floating = true, sticky = true } },
+    -- { rule = { role = "pop-up", class = "Google-chrome" },
+    --  properties = { floating = true, sticky = true } },
     { rule = { class = "inkscape" },
       properties = { floating = true },
       callback = awful.titlebar.add    },
