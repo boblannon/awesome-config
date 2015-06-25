@@ -2,6 +2,7 @@
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
+require("awful.remote")
 -- Theme handling library
 require("beautiful")
 -- Notification library
@@ -10,7 +11,6 @@ require("naughty")
 vicious = require("vicious")
 -- volume widget
 local APW = require("widgets.apw.widget")
--- local keydoc = require("widgets.keydoc.keydoc")
 local systemctl = require("systemctl")
 
 -- Load Debian menu entries
