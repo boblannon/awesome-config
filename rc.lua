@@ -58,25 +58,25 @@ thermalwidget  = widget({ type = "textbox" })
 
 -----------------------------------------------------------------------------------------------------
 -- Keyboard widget
-kbdcfg = {}
-kbdcfg.cmd = "setxkbmap"
-
---list your own keyboard layouts here
-kbdcfg.layout = { "us","in hin-kagapa" }
-
-kbdcfg.current = 1
-kbdcfg.widget = widget({ type = "textbox"})
-kbdcfg.widget.text = " " .. string.sub(kbdcfg.layout[kbdcfg.current], 0, 3) .. " "
-kbdcfg.switch = function ()
-    kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
-    local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
-    kbdcfg.widget.text = string.sub(t, 0, 3)
-    os.execute( kbdcfg.cmd .. " " .. t .. ",us")
-end
-
-kbdcfg.widget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () kbdcfg.switch() end)
-))
+-- kbdcfg = {}
+-- kbdcfg.cmd = "setxkbmap"
+-- 
+-- --list your own keyboard layouts here
+-- kbdcfg.layout = { "us","in hin-kagapa" }
+-- 
+-- kbdcfg.current = 1
+-- kbdcfg.widget = widget({ type = "textbox"})
+-- kbdcfg.widget.text = " " .. string.sub(kbdcfg.layout[kbdcfg.current], 0, 3) .. " "
+-- kbdcfg.switch = function ()
+--     kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+--     local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+--     kbdcfg.widget.text = string.sub(t, 0, 3)
+--     os.execute( kbdcfg.cmd .. " " .. t .. ",us")
+-- end
+-- 
+-- kbdcfg.widget:buttons(awful.util.table.join(
+--     awful.button({ }, 1, function () kbdcfg.switch() end)
+-- ))
 
 -----------------------------------------------------------------------------------------------------
 -- Disk usage widget
@@ -267,7 +267,7 @@ for s = 1, screen.count() do
         memwidget,
         thermalwidget,
         cpuwidget,
-        kbdcfg.widget,
+        -- kbdcfg.widget,
         diskwidget,
         s == 1 and APW or nil,
         -- mytextclock,
@@ -346,7 +346,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
     
-    awful.key({ modkey,           }, "#49", function () kbdcfg.switch() end),
+    -- awful.key({ modkey,           }, "#49", function () kbdcfg.switch() end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
