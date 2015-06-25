@@ -15,15 +15,16 @@ this_dir = config.."/themes/awesome-solarized/dark"
 -- {{{ Main
 theme = {}
 theme.default_themes_path = "/usr/share/awesome/themes"
--- theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
+theme.custom_themes_path = config.."/themes/awesome-themes/"
+theme.wallpaper_cmd = { "awsetbg "..this_dir.."/background.png" }
 
-wpscript = config.."/wallpaper.sh"
-
-if awful.util.file_readable(wpscript) then
-    theme.wallpaper_cmd = { wpscript.." &" }
-else
-    theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
-end
+-- wpscript = config.."/wallpaper.sh"
+-- 
+-- if awful.util.file_readable(wpscript) then
+--     theme.wallpaper_cmd = { wpscript.." &" }
+-- else
+--     theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
+-- end
 
 theme.colors = {}
 theme.colors.base3   = "#fdf6e3ff"
