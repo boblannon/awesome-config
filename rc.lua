@@ -18,7 +18,8 @@ require("debian.menu")
 
 systemctl_shutdown = function()
     if os.getenv("DESKTOP_SESSION") == "gnome-awesome" then
-       systemctl.poweroff()
+       -- systemctl.poweroff()
+       systemctl.exit()
     else
        awesome.quit()
     end
@@ -388,6 +389,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky          end),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -473,6 +475,8 @@ awful.rules.rules = {
       properties = { floating = true, sticky = true } },
     -- { rule = { role = "pop-up", class = "Google-chrome" },
     --  properties = { floating = true, sticky = true } },
+    { rule = { role = "app", class = "Google-chrome", name="Hangouts" },
+      properties = { floating = true } },
     { rule = { class = "inkscape" },
       properties = { floating = true },
       callback = awful.titlebar.add    },

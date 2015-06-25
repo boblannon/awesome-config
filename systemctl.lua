@@ -10,6 +10,10 @@ systemctl = {
 
     hibernate = function()
         os.execute("systemctl hibernate")
+    end,
+
+    exit = function()
+        os.execute("systemctl exit")
     end
 
 }
