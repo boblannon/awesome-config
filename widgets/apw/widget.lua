@@ -29,9 +29,11 @@ local mixer         = 'pavucontrol' -- mixer command
 
 -- End of configuration
 
+local thispath = select('1', ...):match(".+%.") or ""
+
 local awful = require("awful")
 -- local wibox = require("wibox")
-local pulseaudio = require("apw.pulseaudio")
+local pulseaudio = require(thispath.."pulseaudio")
 
 local p = pulseaudio:Create()
 
