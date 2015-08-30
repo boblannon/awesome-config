@@ -344,6 +344,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", systemctl.poweroff),
     awful.key({ modkey, "Shift"   }, "b", systemctl.reboot),
     awful.key({ modkey, "Shift"   }, "z", systemctl.hibernate),
+    awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("xscreensaver-command -lock") end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -354,7 +355,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
     
-    -- awful.key({ modkey,           }, "#49", function () kbdcfg.switch() end),
+-- awful.key({ modkey,           }, "#49", function () kbdcfg.switch() end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
@@ -472,9 +473,9 @@ awful.rules.rules = {
     { rule = { class = "Zenity" },
       properties = { floating = true, sticky = true } },
     { rule = { class = "Xmessage" },
-      properties = { floating = true, sticky = true } },
-    -- { rule = { role = "pop-up", class = "Google-chrome" },
-    --  properties = { floating = true, sticky = true } },
+      properties = { floating = true, sticky = true, ontop = true } },
+    { rule = { class = "Skype" },
+     properties = { floating = true, sticky = true } },
     { rule = { role = "app", class = "Google-chrome", name="Hangouts" },
       properties = { floating = true } },
     { rule = { class = "inkscape" },
